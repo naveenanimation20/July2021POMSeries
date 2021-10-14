@@ -11,9 +11,9 @@ public class DemoPage {
 	}
 	
 	public void demo() {
-	
 		System.out.println("demo");
 		System.out.println("demo1");
+		System.out.println("demo2");
 
 	}
 
