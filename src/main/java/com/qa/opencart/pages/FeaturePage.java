@@ -4,6 +4,8 @@ public class FeaturePage {
 	
 	public static void main(String a[]) {
 		System.out.println("f1");
+		System.out.println("f2");
+
 	}
 
 }
