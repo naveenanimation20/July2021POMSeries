@@ -16,6 +16,7 @@ public class DemoPage {
 		System.out.println("demo2");
 		System.out.println("demo5");
 		System.out.println("demo7");
+		System.out.println("demo8");
 
 
 	}
