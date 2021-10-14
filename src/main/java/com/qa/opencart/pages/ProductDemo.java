@@ -8,11 +8,9 @@ public class ProductDemo {
 		System.out.println("demo 3");
 		System.out.println("demo 4");
 		
-		System.out.println("demo 5");
-		System.out.println("demo 6");
-		System.out.println("demo 7");
+		System.out.println("demo by tom");
 
-		
+				
 	}
 
 }
