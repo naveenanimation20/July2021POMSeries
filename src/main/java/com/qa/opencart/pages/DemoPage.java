@@ -15,8 +15,12 @@ public class DemoPage {
 		System.out.println("demo1");
 		System.out.println("demo2");
 		System.out.println("demo5");
+<<<<<<< HEAD
 		System.out.println("demo7");
 		System.out.println("demo10");
+=======
+		System.out.println("demo6");
+>>>>>>> parent of d2d46ef... resolved conflicts
 
 
 	}
