@@ -39,6 +39,7 @@ public class LoginPage {
 
 	@Step("checking Forgot Pwd link Exist or not....")
 	public boolean isForgotPwdlinkExist() {
+		System.out.println("checking -> isForgotPwdlinkExist");
 		return elementUtil.doIsDiplayed(forgotPwdLink);
 	}
 
