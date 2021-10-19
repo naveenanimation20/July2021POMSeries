@@ -43,9 +43,9 @@ public class ProductInfoTest extends BaseTest {
 		productInfoPage = resultPage.selectProduct("MacBook Pro");
 		Map<String, String> actProdMap = productInfoPage.getProductMetaData();
 		actProdMap.forEach((k,v) -> System.out.println(k + ":" + v));
-		softAssert.assertEquals(actProdMap.get("productname"), "MacBook Pro11");
-		softAssert.assertEquals(actProdMap.get("Brand"), "Apple11");
-		softAssert.assertEquals(actProdMap.get("Product Code"), "Product 1811");
+		softAssert.assertEquals(actProdMap.get("productname"), "MacBook Pro");
+		softAssert.assertEquals(actProdMap.get("Brand"), "Apple");
+		softAssert.assertEquals(actProdMap.get("Product Code"), "Product 18");
 		softAssert.assertEquals(actProdMap.get("price"), "$2,000.00");
 		softAssert.assertAll();
 	}
