@@ -1,67 +1,62 @@
-pipeline{
-    
+pipeline 
+{
     agent any
-    
-    stages{
-        
-        stage("Build"){
-            steps{
-                echo("building the project")
+
+    stages 
+    {
+        stage('Build') 
+        {
+            steps 
+            {
+                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
-        }
-        
-        stage("Run Uts"){
-            steps{
-                echo("run UTs")
-            }
-        }
-        
-        
-        stage("Deploy on dev"){
-            steps{
-                echo("Deploy on dev")
-            }
-        }
-        
-        stage("Deploy on QA"){
-            steps{
-                echo("Deploy on QA")
-            }
-        }
-        
-         stage("Sanity Test Cases on QA"){
-            steps{
-                echo("Sanity Test Cases")
-            }
-        }
-        
-        stage("Regression Test Cases on QA"){
-            steps{
-                echo("Regression Test Cases")
-            }
-        }
-        
-         stage("Deploy on stage"){
-            steps{
-                echo("Deploy on stage")
-            }
-        }
-        
-        stage("Sanity Test Cases on stage"){
-            steps{
-                echo("Sanity Test Cases")
-            }
-        }
-        
-         stage("Deploy on PROD"){
-            steps{
-                echo("Deploy on PROD")
+            post 
+            {
+                success 
+                {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
             }
         }
         
         
+        stage('Regression Automation Test') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    git 'https://github.com/naveenanimation20/July2021POMSeries.git'
+                    sh "mvn clean install"
+                }
+            }
+        }
+                
+     
+        stage('Publish Allure Reports') {
+           steps {
+                script {
+                    allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: '/allure-results']]
+                    ])
+                }
+            }
+        }
+        
+        
+        stage('Publish Extent Report'){
+            steps{
+                     publishHTML([allowMissing: false,
+                                  alwaysLinkToLastBuild: false, 
+                                  keepAll: false, 
+                                  reportDir: 'build', 
+                                  reportFiles: 'TestExecutionReport.html', 
+                                  reportName: 'HTML Extent Report', 
+                                  reportTitles: ''])
+            }
+        }
     }
-    
-    
-    
 }
