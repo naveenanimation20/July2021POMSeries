@@ -10,6 +10,7 @@ public class TestDemo {
 		int l = 100;
 		
 		double d = 12.33;
+		int s = 12;
 		
 		
 		
