@@ -9,6 +9,8 @@ public class TestDemo {
 		String color = "red";
 		int l = 100;
 		
+		String r = "set";
+		
 		
 		
 	}
