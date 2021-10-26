@@ -19,11 +19,11 @@
 		</classes>
 	</test>
 
-	<test name="Accounts page Test">
+	<!-- <test name="Accounts page Test">
 		<classes>
 			<class name="com.qa.opencart.tests.AccountsPageTest" />
 		</classes>
-	</test>
+	</test> -->
 
 	<!-- <test name="ProductInfo page Test"> <classes> <class name="com.qa.opencart.tests.ProductInfoTest" 
 		/> </classes> </test> -->
