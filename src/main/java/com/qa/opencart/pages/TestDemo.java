@@ -7,6 +7,8 @@ public class TestDemo {
 		int i =10;
 		String n = "naveen";
 		String color = "red";
+		int l = 100;
+		
 		
 		
 	}
