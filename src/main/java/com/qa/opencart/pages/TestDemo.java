@@ -13,6 +13,7 @@ public class TestDemo {
 		int s = 12;
 		
 		String name = "nav";
+		int sal = 10;
 		
 
 		
