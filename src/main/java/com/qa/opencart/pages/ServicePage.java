@@ -6,6 +6,8 @@ public class ServicePage {
 
 		int i = 10;
 		
+		int p = 20;
+		
 	}
 
 }
