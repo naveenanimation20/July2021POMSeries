@@ -8,8 +8,6 @@ public class ServicePage {
 		
 		int p = 20;
 		
-		
-		int k = 90;
 	}
 
 }
