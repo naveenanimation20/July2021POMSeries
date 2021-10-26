@@ -9,6 +9,9 @@ public class TestDemo {
 		String color = "red";
 		int l = 100;
 		
+		double d = 12.33;
+		
+		
 		
 		
 	}
