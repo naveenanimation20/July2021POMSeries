@@ -48,13 +48,15 @@ public class DriverFactory {
 		optionsManager = new OptionsManager(prop);
 		highlight = prop.getProperty("highlight");
 		String browser = prop.getProperty("browser").trim();
+		String browserVersion = prop.getProperty("browserversion").trim();
+
 		System.out.println("browser name is : " + browser);
 
 		if (browser.equalsIgnoreCase("chrome")) {
 
 			if (Boolean.parseBoolean(prop.getProperty("remote"))) {
 				// remote
-				init_remoteDriver(browser);
+				init_remoteDriver(browser, browserVersion);
 			} else {// local
 				WebDriverManager.chromedriver().setup();
 				tlDriver.set(new ChromeDriver(optionsManager.getChromeOptions()));
@@ -64,7 +66,7 @@ public class DriverFactory {
 		else if (browser.equalsIgnoreCase("firefox")) {
 			if (Boolean.parseBoolean(prop.getProperty("remote"))) {
 				// remote
-				init_remoteDriver(browser);
+				init_remoteDriver(browser, browserVersion);
 			} else {//local
 				WebDriverManager.firefoxdriver().setup();
 				tlDriver.set(new FirefoxDriver(optionsManager.getFirefoxOptions()));
@@ -85,11 +87,13 @@ public class DriverFactory {
 
 	}
 
-	private void init_remoteDriver(String browser) {
-		System.out.println("Running test on remote grid server: " + browser);
+	private void init_remoteDriver(String browser, String browserVersion) {
+		System.out.println("Running test on remote grid server: " + browser + " :: " + browserVersion);
 		if (browser.equals("chrome")) {
 			DesiredCapabilities cap = DesiredCapabilities.chrome();
 			cap.setCapability("browserName", "chrome");
+			cap.setCapability("browserVersion", browserVersion);
+			cap.setCapability("enableVNC", true);
 			cap.setCapability(ChromeOptions.CAPABILITY, optionsManager.getChromeOptions());
 			try {
 				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), cap));
@@ -99,6 +103,8 @@ public class DriverFactory {
 		} else if (browser.equals("firefox")) {
 			DesiredCapabilities cap = DesiredCapabilities.firefox();
 			cap.setCapability("browserName", "firefox");
+			cap.setCapability("browserVersion", browserVersion);
+			cap.setCapability("enableVNC", true);
 			cap.setCapability(FirefoxOptions.FIREFOX_OPTIONS, optionsManager.getFirefoxOptions());
 			try {
 				tlDriver.set(new RemoteWebDriver(new URL(prop.getProperty("huburl")), cap));
