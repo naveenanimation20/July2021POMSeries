@@ -4,6 +4,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
@@ -22,6 +23,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.qa.opencart.factory.DriverFactory;
 
 public class ElementUtil {
+	
+	public static final Logger LOG = Logger.getLogger(ElementUtil.class);
 
 	private WebDriver driver;
 	private JavaScriptUtil jsUtil;
@@ -64,6 +67,7 @@ public class ElementUtil {
 	}
 
 	public String doGetText(By locator) {
+		System.out.println("locator: " + locator);
 		return getElement(locator).getText();
 	}
 

@@ -4,7 +4,7 @@ screenshot/
 test-output/
 build/
 
-
+application.log
 ##############################
 ## Java
 ##############################

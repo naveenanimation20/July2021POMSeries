@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -36,6 +37,7 @@ public class DriverFactory {
 	public static String highlight;
 
 	public static ThreadLocal<WebDriver> tlDriver = new ThreadLocal<WebDriver>();
+	public static final Logger LOG = Logger.getLogger(DriverFactory.class);
 
 	/**
 	 * This method is used to initialize the webdriver on the basis of given browser
@@ -51,13 +53,17 @@ public class DriverFactory {
 		String browserVersion = prop.getProperty("browserversion").trim();
 
 		System.out.println("browser name is : " + browser);
-
+		LOG.info("browser name is : " + browser + " version : " + browserVersion);
+//		LOG.warn("please upgrade ur chrome.....");
+//		LOG.error("some error is coming...");
+//		LOG.fatal("fata error");
 		if (browser.equalsIgnoreCase("chrome")) {
 
 			if (Boolean.parseBoolean(prop.getProperty("remote"))) {
 				// remote
 				init_remoteDriver(browser, browserVersion);
 			} else {// local
+				LOG.info("running test cases locally on : " + browser);
 				WebDriverManager.chromedriver().setup();
 				tlDriver.set(new ChromeDriver(optionsManager.getChromeOptions()));
 			}
@@ -68,15 +74,18 @@ public class DriverFactory {
 				// remote
 				init_remoteDriver(browser, browserVersion);
 			} else {//local
+				LOG.info("running test cases locally on : " + browser);
 				WebDriverManager.firefoxdriver().setup();
 				tlDriver.set(new FirefoxDriver(optionsManager.getFirefoxOptions()));
 			}
 		}
 
 		else if (browser.equalsIgnoreCase("safari")) {
+			LOG.info("running test cases locally on : " + browser);
 			tlDriver.set(new SafariDriver());
 		} else {
 			System.out.println("please pass the correct browser name..." + browser);
+			LOG.error("please pass the correct browser name..." + browser);
 		}
 
 		getDriver().manage().window().maximize();
